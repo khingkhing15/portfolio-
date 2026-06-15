@@ -8,86 +8,103 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root{
-  --ink: #1F2E29;
-  --ink-soft: #2A3C36;
-  --paper: #F3ECDD;
-  --paper-light: #FBF7EE;
-  --text: #25302C;
-  --text-soft: #5C6B63;
-  --navy: #2D4159;
-  --coral: #C0533A;
-  --gold: #C9974A;
-  --sage: #7E9384;
-  --border: rgba(37,48,44,0.16);
+  --bg: #0E1F18;
+  --bg-raised: #1C352A;
+  --bg-raised-2: #25463A;
+  --cream: #F4EEE1;
+  --text-soft: #A9C2B3;
+  --gold: #E8B65E;
+  --coral: #EE8669;
+  --mint: #7FD9AE;
+  --peri: #9DB4E8;
+  --border: rgba(244,238,225,0.12);
+  --border-strong: rgba(244,238,225,0.26);
   --serif: 'Fraunces', Georgia, serif;
   --sans: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
   --mono: 'IBM Plex Mono', monospace;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
-
 html{scroll-behavior:smooth;}
-
 body{
   font-family:var(--sans);
-  color:var(--text);
-  background:var(--paper);
+  color:var(--cream);
+  background:var(--bg);
   line-height:1.6;
 }
+::selection{background:var(--gold); color:var(--bg);}
+a{color:inherit;}
+:focus-visible{outline:2px solid var(--gold); outline-offset:3px; border-radius:2px;}
 
 /* ===== NAV ===== */
 nav{
-  position:sticky;top:0;z-index:50;
+  position:sticky;top:0;z-index:60;
   display:flex;align-items:center;justify-content:space-between;
-  padding:18px 6vw;
-  background:var(--ink);
-  color:var(--paper);
-  border-bottom:1px solid rgba(243,236,221,0.12);
+  padding:16px 6vw;
+  background:rgba(14,31,24,0.86);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
 }
 .nav__name{
   font-family:var(--serif);
   font-weight:600;
-  font-size:1.1rem;
+  font-size:1.05rem;
   letter-spacing:0.02em;
 }
 .nav__links{
-  display:flex;gap:28px;
+  position:relative;
+  display:flex;gap:24px;
   font-family:var(--mono);
-  font-size:0.72rem;
+  font-size:0.7rem;
   letter-spacing:0.12em;
   text-transform:uppercase;
 }
-.nav__links a{color:var(--paper);text-decoration:none;opacity:0.75;transition:opacity 0.2s;}
-.nav__links a:hover, .nav__links a:focus-visible{opacity:1;}
-.nav__links a:focus-visible{outline:1px dashed var(--gold);outline-offset:4px;}
-
-@media (max-width:640px){
-  .nav__links{gap:16px;font-size:0.62rem;}
+.nav__links a{
+  position:relative;
+  text-decoration:none;
+  color:var(--text-soft);
+  padding:6px 0;
+  transition:color 0.2s;
+}
+.nav__links a:hover, .nav__links a.active{color:var(--cream);}
+.nav__indicator{
+  position:absolute;
+  bottom:0; left:0;
+  height:2px;
+  background:var(--gold);
+  border-radius:2px;
+  transition:transform 0.35s cubic-bezier(.65,0,.35,1), width 0.35s cubic-bezier(.65,0,.35,1);
+  pointer-events:none;
+}
+@media (max-width:880px){
+  .nav__indicator{display:none;}
+  .nav__links{gap:14px;font-size:0.6rem;flex-wrap:wrap;justify-content:flex-end;}
 }
 
 /* ===== HERO ===== */
 .hero{
-  background:var(--ink);
-  color:var(--paper);
-  padding:80px 6vw 110px;
-  position:relative;
-  overflow:hidden;
+  padding:64px 6vw 80px;
+  display:flex;
+  gap:48px;
+  flex-wrap:wrap;
+  align-items:center;
 }
+.hero__text{flex:1.3; min-width:300px;}
 .hero__eyebrow{
   font-family:var(--mono);
-  font-size:0.78rem;
+  font-size:0.76rem;
   letter-spacing:0.22em;
   text-transform:uppercase;
   color:var(--gold);
-  margin-bottom:22px;
+  margin-bottom:20px;
 }
 .hero h1{
   font-family:var(--serif);
   font-weight:300;
-  font-size:clamp(2.6rem,8vw,5.4rem);
-  line-height:1.05;
+  font-size:clamp(2.4rem,6.4vw,4.6rem);
+  line-height:1.08;
   letter-spacing:-0.01em;
-  max-width:14ch;
+  max-width:15ch;
 }
 .hero h1 em{
   font-style:italic;
@@ -95,61 +112,73 @@ nav{
   color:var(--gold);
 }
 .hero__sub{
-  margin-top:26px;
+  margin-top:24px;
   max-width:46ch;
-  font-size:1.05rem;
-  color:rgba(243,236,221,0.78);
+  font-size:1.02rem;
+  color:var(--text-soft);
 }
 .hero__contact{
-  margin-top:36px;
+  margin-top:32px;
   display:flex;
   flex-wrap:wrap;
-  gap:14px;
+  gap:12px;
   font-family:var(--mono);
-  font-size:0.78rem;
+  font-size:0.74rem;
 }
 .chip{
-  border:1px solid rgba(243,236,221,0.3);
+  border:1px solid var(--border-strong);
   border-radius:999px;
   padding:7px 16px;
-  color:var(--paper);
+  color:var(--cream);
 }
 
-/* Passport stamps */
-.stamps{
-  margin-top:64px;
-  display:flex;
-  gap:28px;
-  flex-wrap:wrap;
-}
-.stamp{
-  width:108px;height:108px;border-radius:50%;
-  border:2px dashed currentColor;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;
+/* ===== CONSTELLATION ===== */
+.constellation-wrap{flex:1; min-width:300px; max-width:560px;}
+.constellation{width:100%; height:auto; overflow:visible;}
+.const__caption{
+  margin-top:10px;
   font-family:var(--mono);
+  font-size:0.66rem;
+  letter-spacing:0.1em;
   text-transform:uppercase;
-  flex-shrink:0;
+  color:var(--text-soft);
+  text-align:center;
 }
-.stamp__city{font-size:0.78rem;font-weight:600;letter-spacing:0.04em;}
-.stamp__meta{font-size:0.58rem;margin-top:6px;letter-spacing:0.06em;opacity:0.85;}
-.stamp--navy{color:#7C97B5;}
-.stamp--coral{color:#E08A75;}
-.stamp--gold{color:var(--gold);}
-.stamp--sage{color:var(--sage);}
-
-@media (max-width:640px){
-  .stamps{gap:18px;}
-  .stamp{width:88px;height:88px;}
-  .stamp__city{font-size:0.68rem;}
-  .stamp__meta{font-size:0.52rem;}
+.link{stroke:var(--border-strong); stroke-width:1.5; stroke-dasharray:4 6; fill:none;}
+.node{cursor:pointer;}
+.node__halo{opacity:0.18; transform-origin:center; transform-box:fill-box; animation:pulse 3.4s ease-in-out infinite;}
+.node--bangkok .node__halo, .node--bangkok .node__dot{fill:var(--coral);}
+.node--lampang .node__halo, .node--lampang .node__dot{fill:var(--mint);}
+.node--osaka .node__halo, .node--osaka .node__dot{fill:var(--peri);}
+.node--delft .node__halo, .node--delft .node__dot{fill:var(--mint);}
+.node--seoul .node__halo, .node--seoul .node__dot{fill:var(--peri);}
+.node--exeter .node__halo, .node--exeter .node__dot{fill:var(--gold);}
+.node--bangkok .node__halo{animation-delay:0.2s;}
+.node--lampang .node__halo{animation-delay:0.6s;}
+.node--osaka .node__halo{animation-delay:1s;}
+.node--delft .node__halo{animation-delay:1.4s;}
+.node--seoul .node__halo{animation-delay:1.8s;}
+.node__dot{transition:r 0.2s; stroke:transparent; stroke-width:2;}
+.node:hover .node__dot, .node:focus .node__dot{stroke:var(--cream);}
+.node__tip{opacity:0; transition:opacity 0.18s;}
+.node:hover .node__tip, .node:focus .node__tip{opacity:1;}
+.node__tip-bg{fill:var(--bg-raised); stroke:var(--border-strong); stroke-width:1;}
+.node__tip-text{font-family:var(--mono); font-size:11px; fill:var(--cream); text-transform:uppercase; letter-spacing:0.04em;}
+.node__tip-meta{font-family:var(--mono); font-size:9px; fill:var(--text-soft); letter-spacing:0.04em;}
+.hub__label{font-family:var(--mono); font-size:10px; fill:var(--gold); text-transform:uppercase; letter-spacing:0.08em;}
+@keyframes pulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.35);}
+}
+@media (prefers-reduced-motion: reduce){
+  .node__halo{animation:none;}
 }
 
 /* ===== SECTION SHARED ===== */
-section{padding:90px 6vw;}
+section{padding:80px 6vw;}
 .section__label{
   font-family:var(--mono);
-  font-size:0.75rem;
+  font-size:0.74rem;
   letter-spacing:0.22em;
   text-transform:uppercase;
   color:var(--coral);
@@ -158,92 +187,89 @@ section{padding:90px 6vw;}
 .section__title{
   font-family:var(--serif);
   font-weight:500;
-  font-size:clamp(1.8rem,4vw,2.6rem);
+  font-size:clamp(1.7rem,4vw,2.5rem);
   margin-bottom:28px;
   max-width:18ch;
 }
 
 /* ===== ABOUT ===== */
-.about{display:flex;gap:60px;flex-wrap:wrap;}
+.about{display:flex;gap:48px;flex-wrap:wrap;}
 .about__text{flex:2;min-width:280px;}
-.about__text p{
-  font-size:1.05rem;
-  color:var(--text-soft);
-  max-width:62ch;
-}
+.about__text p{font-size:1.02rem; color:var(--text-soft); max-width:62ch;}
 .about__text p + p{margin-top:18px;}
 .about__facts{
-  flex:1;min-width:220px;
+  flex:1;min-width:240px;
+  background:var(--bg-raised);
+  border:1px dashed var(--border-strong);
+  border-radius:10px;
+  padding:26px;
   font-family:var(--mono);
   font-size:0.85rem;
-  border-left:2px dashed var(--border);
-  padding-left:24px;
 }
 .about__facts dt{
   text-transform:uppercase;
   letter-spacing:0.1em;
-  font-size:0.68rem;
-  color:var(--coral);
+  font-size:0.66rem;
+  color:var(--gold);
   margin-top:18px;
 }
 .about__facts dt:first-child{margin-top:0;}
-.about__facts dd{margin-top:4px;color:var(--text);}
+.about__facts dd{margin-top:4px; color:var(--cream); line-height:1.5;}
 
 /* ===== JOURNEY / FILTERS ===== */
-.journey{background:var(--paper);}
 .tabs{
+  position:relative;
   display:flex;
   flex-wrap:wrap;
-  gap:14px;
+  gap:10px;
   margin-bottom:40px;
 }
+.tabs__pill{
+  position:absolute; top:0; left:0;
+  background:var(--gold);
+  border-radius:999px;
+  z-index:0;
+  transition:transform 0.35s cubic-bezier(.65,0,.35,1), width 0.35s cubic-bezier(.65,0,.35,1), height 0.35s cubic-bezier(.65,0,.35,1);
+}
 .tab{
-  background:var(--paper-light);
-  border:1px solid var(--border);
-  border-radius:4px 4px 4px 16px;
-  padding:10px 18px 10px 32px;
-  position:relative;
+  position:relative; z-index:1;
+  background:var(--bg-raised);
+  border:1px solid var(--border-strong);
+  border-radius:999px;
+  padding:10px 18px;
   font-family:var(--mono);
-  font-size:0.72rem;
+  font-size:0.7rem;
   text-transform:uppercase;
   letter-spacing:0.1em;
   cursor:pointer;
-  color:var(--text);
-  transition:background 0.2s, color 0.2s;
+  color:var(--text-soft);
+  transition:color 0.25s, border-color 0.25s;
 }
-.tab::before{
-  content:'';
-  position:absolute;
-  left:12px;top:50%;
-  width:7px;height:7px;
-  border-radius:50%;
-  background:var(--paper);
-  border:1px solid var(--border);
-  transform:translateY(-50%);
-}
-.tab:hover{border-color:var(--coral);}
-.tab.active{background:var(--ink);color:var(--paper);border-color:var(--ink);}
-.tab.active::before{background:var(--ink);border-color:rgba(243,236,221,0.4);}
-.tab:focus-visible{outline:2px dashed var(--coral);outline-offset:2px;}
+.tab:hover{border-color:var(--gold); color:var(--cream);}
+.tab.active{color:var(--bg); border-color:transparent;}
 
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(290px,1fr));
-  gap:22px;
+  gap:20px;
 }
 .card{
-  background:var(--paper-light);
+  background:var(--bg-raised);
   border:1px solid var(--border);
-  border-radius:6px;
+  border-radius:10px;
   padding:24px;
   position:relative;
-  transition:transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+  transition:transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, opacity 0.25s ease;
 }
 .card:hover{
   transform:translateY(-4px);
-  box-shadow:0 10px 24px rgba(31,46,41,0.08);
+  background:var(--bg-raised-2);
 }
 .card.hidden{display:none;}
+.card.spotlight{
+  transform:translateY(-4px);
+  box-shadow:0 0 0 1.5px var(--gold), 0 16px 32px rgba(232,182,94,0.18);
+}
 .card__stamp{
   position:absolute;
   top:18px;right:18px;
@@ -258,40 +284,34 @@ section{padding:90px 6vw;}
   line-height:1.25;
   transform:rotate(-7deg);
 }
-.card--navy .card__stamp{color:var(--navy);}
+.card--peri .card__stamp{color:var(--peri);}
 .card--coral .card__stamp{color:var(--coral);}
 .card--gold .card__stamp{color:var(--gold);}
-.card--sage .card__stamp{color:var(--sage);}
+.card--mint .card__stamp{color:var(--mint);}
 
 .card__role{
   font-family:var(--serif);
   font-weight:600;
-  font-size:1.15rem;
+  font-size:1.12rem;
   max-width:75%;
   margin-bottom:4px;
 }
 .card__org{
   font-family:var(--mono);
-  font-size:0.7rem;
+  font-size:0.68rem;
   text-transform:uppercase;
   letter-spacing:0.08em;
   color:var(--text-soft);
   margin-bottom:14px;
 }
-.card__desc{
-  font-size:0.92rem;
-  color:var(--text-soft);
-}
-.card__tags{
-  margin-top:16px;
-  display:flex;flex-wrap:wrap;gap:6px;
-}
+.card__desc{font-size:0.92rem; color:var(--text-soft);}
+.card__tags{margin-top:16px; display:flex;flex-wrap:wrap;gap:6px;}
 .card__tags span{
   font-family:var(--mono);
-  font-size:0.62rem;
+  font-size:0.6rem;
   text-transform:uppercase;
   letter-spacing:0.06em;
-  background:var(--paper);
+  background:var(--bg);
   border:1px solid var(--border);
   border-radius:999px;
   padding:3px 10px;
@@ -301,158 +321,149 @@ section{padding:90px 6vw;}
   display:inline-block;
   margin-top:16px;
   font-family:var(--mono);
-  font-size:0.72rem;
+  font-size:0.7rem;
   text-transform:uppercase;
   letter-spacing:0.08em;
-  color:var(--coral);
+  color:var(--gold);
   text-decoration:none;
-  border-bottom:1px dashed var(--coral);
+  border-bottom:1px dashed var(--gold);
   padding-bottom:2px;
+  transition:color 0.2s, border-color 0.2s;
 }
-.card__link:hover{color:var(--ink);border-color:var(--ink);}
+.card__link:hover{color:var(--mint); border-color:var(--mint);}
+
+.diss-links{display:flex; flex-direction:column; gap:8px; margin-top:16px;}
+.diss-links .card__link{margin-top:0;}
 
 /* ===== EDUCATION ===== */
-.education{background:var(--paper-light);}
 .edu-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:24px;
 }
 .edu-card{
-  border-left:3px solid var(--coral);
-  padding-left:24px;
+  background:var(--bg-raised);
+  border-radius:10px;
+  padding:24px 26px;
+  border-left:3px solid var(--gold);
 }
-.edu-card h3{
-  font-family:var(--serif);
-  font-weight:600;
-  font-size:1.25rem;
-  margin-bottom:6px;
-}
+.edu-card:nth-child(2){border-left-color:var(--mint);}
+.edu-card h3{font-family:var(--serif); font-weight:600; font-size:1.22rem; margin-bottom:6px;}
 .edu-card .edu-meta{
   font-family:var(--mono);
-  font-size:0.72rem;
+  font-size:0.7rem;
   text-transform:uppercase;
   letter-spacing:0.08em;
-  color:var(--coral);
+  color:var(--gold);
   margin-bottom:10px;
 }
-.edu-card p{color:var(--text-soft);font-size:0.92rem;}
+.edu-card:nth-child(2) .edu-meta{color:var(--mint);}
+.edu-card p{color:var(--text-soft); font-size:0.92rem;}
 
-/* ===== DISSERTATION / RESEARCH FEATURE ===== */
-.dissertation{background:var(--paper);}
-.diss-grid{
-  display:flex;
-  gap:50px;
-  flex-wrap:wrap;
-  align-items:flex-start;
-}
-.diss-text{flex:1.6;min-width:280px;}
-.diss-text p{
-  font-size:1rem;
-  color:var(--text-soft);
-  max-width:64ch;
-}
+/* ===== FEATURED (RESEARCH / CASE STUDY / PROJECT) ===== */
+.diss-grid{display:flex; gap:48px; flex-wrap:wrap; align-items:flex-start;}
+.diss-text{flex:1.6; min-width:280px;}
+.diss-text p{font-size:1rem; color:var(--text-soft); max-width:64ch;}
 .diss-text p + p{margin-top:18px;}
-.diss-text strong{color:var(--text);font-weight:600;}
+.diss-text strong{color:var(--cream); font-weight:600;}
 .diss-file{
-  flex:1;
-  min-width:260px;
-  background:var(--paper-light);
-  border:1px dashed var(--border);
-  border-radius:8px;
-  padding:28px;
+  flex:1; min-width:260px;
+  background:var(--bg-raised);
+  border:1px dashed var(--border-strong);
+  border-radius:10px;
+  padding:26px;
 }
 .diss-file__header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:18px;
-  padding-bottom:14px;
+  display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;
+  margin-bottom:18px; padding-bottom:14px;
   border-bottom:1px dashed var(--border);
   font-family:var(--mono);
-  font-size:0.66rem;
+  font-size:0.64rem;
   text-transform:uppercase;
   letter-spacing:0.1em;
   color:var(--coral);
 }
 .diss-stat{margin-bottom:14px;}
-.diss-stat dt{
-  font-family:var(--mono);
-  font-size:0.64rem;
-  text-transform:uppercase;
-  letter-spacing:0.1em;
-  color:var(--text-soft);
-}
-.diss-stat dd{
-  font-family:var(--serif);
-  font-size:1.05rem;
-  margin-top:3px;
-  color:var(--text);
-}
+.diss-stat dt{font-family:var(--mono); font-size:0.62rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-soft);}
+.diss-stat dd{font-family:var(--serif); font-size:1.04rem; margin-top:3px; color:var(--cream);}
+.count{font-weight:600; color:var(--gold);}
 .diss-finding{
-  margin-top:22px;
+  margin-top:20px;
   padding:18px;
-  background:var(--ink);
-  color:var(--paper);
-  border-radius:6px;
+  background:var(--bg-raised-2);
+  border-radius:8px;
   font-family:var(--serif);
-  font-size:0.98rem;
+  font-size:0.96rem;
   line-height:1.5;
 }
 .diss-finding span{
   display:block;
   font-family:var(--mono);
-  font-size:0.62rem;
+  font-size:0.6rem;
   text-transform:uppercase;
   letter-spacing:0.14em;
   color:var(--gold);
   margin-bottom:8px;
 }
 
-/* ===== SKILLS ===== */
-.skills__groups{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:32px;
+/* ===== MEDIATION DIAGRAM ===== */
+.med-diagram{margin-top:44px;}
+.med-diagram__controls{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px;}
+.med-toggle{
+  font-family:var(--mono);
+  font-size:0.68rem;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  padding:9px 16px;
+  border-radius:999px;
+  border:1px solid var(--border-strong);
+  background:var(--bg-raised);
+  color:var(--text-soft);
+  cursor:pointer;
+  transition:all 0.2s;
 }
+.med-toggle.active{background:var(--gold); color:var(--bg); border-color:transparent;}
+.med-toggle[data-path="direct"].active{background:var(--coral);}
+.med-svg{width:100%; max-width:680px; height:auto; display:block;}
+.med-box rect{fill:var(--bg-raised); stroke:var(--border-strong); stroke-width:1.5;}
+.med-box text{font-family:var(--mono); font-size:13px; fill:var(--cream); text-transform:uppercase; letter-spacing:0.04em;}
+.med-path{stroke:var(--text-soft); stroke-width:2; fill:none; opacity:0.35; transition:all 0.3s;}
+.med-path.path-direct{stroke-dasharray:5 6;}
+.med-path.is-active.path-indirect{stroke:var(--mint); opacity:1; stroke-width:2.5;}
+.med-path.is-active.path-direct{stroke:var(--coral); opacity:1; stroke-width:2.5;}
+.med-arrow{fill:var(--text-soft); opacity:0.35; transition:all 0.3s;}
+.med-arrow.is-active.indirect{fill:var(--mint); opacity:1;}
+.med-arrow.is-active.direct{fill:var(--coral); opacity:1;}
+.med-diagram__caption{
+  margin-top:18px;
+  font-size:0.95rem;
+  color:var(--text-soft);
+  max-width:60ch;
+}
+
+/* ===== SKILLS ===== */
+.skills__groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:32px;}
 .skills__group h4{
   font-family:var(--mono);
   font-size:0.72rem;
   text-transform:uppercase;
   letter-spacing:0.12em;
-  color:var(--coral);
+  color:var(--gold);
   margin-bottom:14px;
 }
 .skills__group ul{list-style:none;}
-.skills__group li{
-  font-family:var(--serif);
-  font-size:1.05rem;
-  padding:7px 0;
-  border-bottom:1px dashed var(--border);
-}
+.skills__group li{font-family:var(--serif); font-size:1.04rem; padding:7px 0; border-bottom:1px dashed var(--border);}
 .skills__group li:last-child{border-bottom:none;}
 
 /* ===== CONTACT / FOOTER ===== */
 footer{
-  background:var(--ink);
-  color:var(--paper);
-  padding:90px 6vw 50px;
+  background:var(--bg-raised);
+  padding:80px 6vw 50px;
+  border-top:1px solid var(--border);
 }
 footer .section__label{color:var(--gold);}
-footer .section__title{color:var(--paper);}
-.footer__row{
-  display:flex;
-  flex-wrap:wrap;
-  gap:40px;
-  margin-bottom:60px;
-}
-.footer__item{
-  font-family:var(--mono);
-  font-size:0.78rem;
-  text-transform:uppercase;
-  letter-spacing:0.1em;
-  color:rgba(243,236,221,0.55);
-}
+.footer__row{display:flex; flex-wrap:wrap; gap:40px; margin-bottom:60px;}
+.footer__item{font-family:var(--mono); font-size:0.76rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-soft);}
 .footer__item a{
   display:block;
   font-family:var(--serif);
@@ -460,31 +471,28 @@ footer .section__title{color:var(--paper);}
   font-weight:500;
   text-transform:none;
   letter-spacing:0;
-  color:var(--paper);
+  color:var(--cream);
   text-decoration:none;
   margin-top:6px;
+  transition:color 0.2s;
 }
 .footer__item a:hover{color:var(--gold);}
 .footer__bottom{
-  border-top:1px solid rgba(243,236,221,0.12);
+  border-top:1px solid var(--border);
   padding-top:24px;
   font-family:var(--mono);
-  font-size:0.68rem;
+  font-size:0.66rem;
   letter-spacing:0.08em;
-  color:rgba(243,236,221,0.4);
+  color:var(--text-soft);
   text-transform:uppercase;
 }
 
 /* Reveal animation */
-.reveal{
-  opacity:0;
-  transform:translateY(16px);
-  transition:opacity 0.6s ease, transform 0.6s ease;
-}
-.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal{opacity:0; transform:translateY(16px); transition:opacity 0.6s ease, transform 0.6s ease;}
+.reveal.visible{opacity:1; transform:translateY(0);}
 
 @media (prefers-reduced-motion: reduce){
-  .reveal{opacity:1;transform:none;transition:none;}
+  .reveal{opacity:1; transform:none; transition:none;}
   .card{transition:none;}
   html{scroll-behavior:auto;}
 }
@@ -494,7 +502,8 @@ footer .section__title{color:var(--paper);}
 
 <nav>
   <div class="nav__name">Nichatorn Uphonthian</div>
-  <div class="nav__links">
+  <div class="nav__links" id="navLinks">
+    <span class="nav__indicator" id="navIndicator"></span>
     <a href="#about">About</a>
     <a href="#journey">Journey</a>
     <a href="#education">Education</a>
@@ -506,53 +515,116 @@ footer .section__title{color:var(--paper);}
 </nav>
 
 <section class="hero">
-  <div class="hero__eyebrow">Field notes &amp; case files — Bangkok to Exeter</div>
-  <h1>Building bridges between people, <em>places</em> &amp; ideas.</h1>
-  <p class="hero__sub">Psychology graduate, mental health advocate and human rights–minded community organiser — six years of fieldwork spanning grassroots exhibitions, disability-inclusive events, UN climate dialogues and a restaurant floor.</p>
-  <div class="hero__contact">
-    <span class="chip">Exeter, UK</span>
-    <span class="chip">07899 056477</span>
-    <span class="chip">MSc Psychology, Exeter (2025)</span>
-    <span class="chip">Mental Health &amp; Human Rights Advocacy</span>
+  <div class="hero__text">
+    <div class="hero__eyebrow">Field notes &amp; case files — Bangkok to Exeter</div>
+    <h1>Building bridges between people, <em>places</em> &amp; ideas.</h1>
+    <p class="hero__sub">Psychology &amp; social entrepreneurship graduate, UX/UI researcher &amp; designer, and human rights–minded community organiser — six years of fieldwork spanning grassroots exhibitions, disability-inclusive events, usability testing and UN climate dialogues.</p>
+    <div class="hero__contact">
+      <span class="chip">Exeter, UK · open to relocation</span>
+      <span class="chip">07899 056477</span>
+      <span class="chip">MSc Psychology, Exeter (2025)</span>
+      <span class="chip">BA Social Entrepreneurship, Thammasat (2023)</span>
+      <span class="chip">UX Research &amp; Design</span>
+      <span class="chip">Mental Health &amp; Human Rights Advocacy</span>
+    </div>
   </div>
-  <div class="stamps">
-    <div class="stamp stamp--navy" style="transform:rotate(-6deg)">
-      <span class="stamp__city">Bangkok</span>
-      <span class="stamp__meta">TH · 2020–24</span>
-    </div>
-    <div class="stamp stamp--coral" style="transform:rotate(4deg)">
-      <span class="stamp__city">Lampang</span>
-      <span class="stamp__meta">TH · 2020</span>
-    </div>
-    <div class="stamp stamp--gold" style="transform:rotate(-3deg)">
-      <span class="stamp__city">Osaka</span>
-      <span class="stamp__meta">JP · 2021</span>
-    </div>
-    <div class="stamp stamp--sage" style="transform:rotate(7deg)">
-      <span class="stamp__city">Delft</span>
-      <span class="stamp__meta">NL · 2021</span>
-    </div>
-    <div class="stamp stamp--navy" style="transform:rotate(-5deg)">
-      <span class="stamp__city">Exeter</span>
-      <span class="stamp__meta">UK · 2024–</span>
-    </div>
+  <div class="constellation-wrap">
+    <svg class="constellation" viewBox="0 0 640 460" role="img" aria-label="Interactive map of places I've worked, radiating from Exeter">
+      <line class="link" x1="160" y1="300" x2="430" y2="100"/>
+      <line class="link" x1="160" y1="300" x2="560" y2="200"/>
+      <line class="link" x1="160" y1="300" x2="540" y2="320"/>
+      <line class="link" x1="160" y1="300" x2="360" y2="400"/>
+      <line class="link" x1="160" y1="300" x2="300" y2="70"/>
+
+      <!-- Exeter hub -->
+      <g class="node node--exeter" data-city="exeter" tabindex="0" role="button" aria-label="Exeter — current base. Activate to view related work">
+        <title>Exeter, UK — current base</title>
+        <circle class="node__halo" cx="160" cy="300" r="20"/>
+        <circle class="node__dot" cx="160" cy="300" r="9"/>
+        <text class="hub__label" x="160" y="332" text-anchor="middle">You are here</text>
+        <text class="hub__label" x="160" y="346" text-anchor="middle">Exeter, UK</text>
+      </g>
+
+      <!-- Bangkok -->
+      <g class="node node--bangkok" data-city="bangkok" tabindex="0" role="button" aria-label="Bangkok, Thailand — activate to view related work">
+        <title>Bangkok, Thailand · 2020–24</title>
+        <circle class="node__halo" cx="430" cy="100" r="16"/>
+        <circle class="node__dot" cx="430" cy="100" r="8"/>
+        <g class="node__tip">
+          <rect class="node__tip-bg" x="450" y="64" width="150" height="44" rx="6"/>
+          <text class="node__tip-text" x="462" y="84">Bangkok, TH</text>
+          <text class="node__tip-meta" x="462" y="99">2020–24 · 8 entries</text>
+        </g>
+      </g>
+
+      <!-- Lampang -->
+      <g class="node node--lampang" data-city="lampang" tabindex="0" role="button" aria-label="Lampang, Thailand — activate to view related work">
+        <title>Lampang, Thailand · 2020</title>
+        <circle class="node__halo" cx="560" cy="200" r="14"/>
+        <circle class="node__dot" cx="560" cy="200" r="7"/>
+        <g class="node__tip">
+          <rect class="node__tip-bg" x="420" y="160" width="150" height="44" rx="6"/>
+          <text class="node__tip-text" x="432" y="180">Lampang, TH</text>
+          <text class="node__tip-meta" x="432" y="195">2020 · Fieldwork</text>
+        </g>
+      </g>
+
+      <!-- Osaka -->
+      <g class="node node--osaka" data-city="osaka" tabindex="0" role="button" aria-label="Osaka, Japan — activate to view related work">
+        <title>Osaka, Japan · 2021–22</title>
+        <circle class="node__halo" cx="540" cy="320" r="14"/>
+        <circle class="node__dot" cx="540" cy="320" r="7"/>
+        <g class="node__tip">
+          <rect class="node__tip-bg" x="400" y="332" width="150" height="44" rx="6"/>
+          <text class="node__tip-text" x="412" y="352">Osaka, JP</text>
+          <text class="node__tip-meta" x="412" y="367">2021–22 · Exchange</text>
+        </g>
+      </g>
+
+      <!-- Delft -->
+      <g class="node node--delft" data-city="delft" tabindex="0" role="button" aria-label="Delft, Netherlands — activate to view related work">
+        <title>Delft, Netherlands · 2021</title>
+        <circle class="node__halo" cx="360" cy="400" r="14"/>
+        <circle class="node__dot" cx="360" cy="400" r="7"/>
+        <g class="node__tip">
+          <rect class="node__tip-bg" x="200" y="412" width="150" height="44" rx="6"/>
+          <text class="node__tip-text" x="212" y="432">Delft, NL</text>
+          <text class="node__tip-meta" x="212" y="447">2021 · Workshop</text>
+        </g>
+      </g>
+
+      <!-- Seoul -->
+      <g class="node node--seoul" data-city="seoul" tabindex="0" role="button" aria-label="Seoul, South Korea — activate to view related work">
+        <title>Seoul, South Korea · 2021</title>
+        <circle class="node__halo" cx="300" cy="70" r="14"/>
+        <circle class="node__dot" cx="300" cy="70" r="7"/>
+        <g class="node__tip">
+          <rect class="node__tip-bg" x="160" y="20" width="150" height="44" rx="6"/>
+          <text class="node__tip-text" x="172" y="40">Seoul, KR</text>
+          <text class="node__tip-meta" x="172" y="55">2021 · Forum</text>
+        </g>
+      </g>
+    </svg>
+    <p class="const__caption">Click a city to jump to related work below</p>
   </div>
 </section>
 
 <section id="about" class="about reveal">
   <div class="about__text">
     <div class="section__label">About</div>
-    <h2 class="section__title">Half researcher, half organiser, all curiosity</h2>
-    <p>Over the past six years I've coordinated a community exhibition in Bangkok's old quarters, taken notes at a UN climate policy dialogue, designed app interfaces, raised funds for visiting artists, run an inclusive 300-person community race for people with and without disabilities, and waited tables in Exeter — always asking the same question underneath it all: how do people actually experience the places, services and systems built around them, and whose voices get left out of that design?</p>
-    <p>I've recently completed an MSc in Psychology at the University of Exeter, with a particular focus on mental health advocacy and human rights. That research grounding now sits alongside a career already shaped by inclusive community design, disability-inclusive programming and grassroots social innovation across Thailand, Japan, the Netherlands and the UK — and it's the lens I bring to every project, from policy dialogues to a restaurant floor.</p>
+    <h2 class="section__title">Psychology, social entrepreneurship, and six years of people-first work</h2>
+    <p>I'm a Psychology graduate (MSc, University of Exeter) with a background in Social Entrepreneurship and six years designing and delivering wellbeing, community engagement and social impact initiatives across Thailand, Japan and the UK. That combination — behavioural research, stakeholder engagement, project management, user-centred design and cross-cultural communication — has let me lead multidisciplinary teams and deliver inclusive programmes that strengthen participation and community wellbeing, from a 30-person exhibition team in Bangkok to a UX research project on perceived safety in a Bangkok neighbourhood.</p>
+    <p>My research focuses on mental health, mindfulness, psychological decentering and rumination, grounding how I approach evidence-informed design and engagement. That same evidence-led approach carries through everything I do: a dissertation built on validated measures and mediation analysis, a UX case study tested down to the second with real participants, and a community project designed for sustainable handover rather than a one-off event.</p>
+    <p>This combination of psychology and social entrepreneurship has taken me from ethnographic fieldwork in a rural Thai village, to an international workshop on spatial justice in the Netherlands, to a global forum on social innovation in South Korea — each one reinforcing the same lesson: good research and good design both start with listening. Alongside that, I bring practical tools to turn listening into action, from SQL and Tableau for working with data, to Adobe XD for prototyping and Qualtrics for survey design, so insights don't stay as findings but become something usable.</p>
+    <p>I'm drawn to work where psychology, human rights and inclusive design meet — building healthier, more connected workplaces and communities. Whatever the project, the approach stays the same: understand the people involved, ground decisions in evidence, and design for genuine participation rather than just access. I'm currently looking for roles where that combination — research rigour, design practice, and a genuine commitment to inclusion — can contribute to products, services or programmes that matter to the people who use them.</p>
   </div>
   <dl class="about__facts">
     <dt>Based in</dt>
-    <dd>Exeter, England, UK</dd>
+    <dd>Exeter, England, UK — open to relocating anywhere</dd>
     <dt>Currently</dt>
     <dd>MSc Psychology Conversion, University of Exeter (completed 2025) · Front of House, Pho Restaurant</dd>
     <dt>Areas of focus</dt>
-    <dd>Mental health advocacy · Human rights · Inclusive community design</dd>
+    <dd>UX research &amp; design · Behavioural &amp; social research · Human rights · Inclusive community design</dd>
     <dt>Languages of work</dt>
     <dd>English · Thai</dd>
     <dt>Recognised in</dt>
@@ -560,11 +632,12 @@ footer .section__title{color:var(--paper);}
   </dl>
 </section>
 
-<section id="journey" class="journey">
+<section id="journey">
   <div class="section__label">The Journey</div>
   <h2 class="section__title">Fifteen postings, five threads</h2>
 
-  <div class="tabs" role="tablist" aria-label="Filter experience by category">
+  <div class="tabs" role="tablist" aria-label="Filter experience by category" id="tabs">
+    <span class="tabs__pill" id="tabsPill"></span>
     <button class="tab active" data-filter="all" role="tab" aria-selected="true">All entries</button>
     <button class="tab" data-filter="advocacy" role="tab" aria-selected="false">Advocacy &amp; Wellbeing</button>
     <button class="tab" data-filter="community" role="tab" aria-selected="false">Community &amp; Social Impact</button>
@@ -573,9 +646,9 @@ footer .section__title{color:var(--paper);}
     <button class="tab" data-filter="hospitality" role="tab" aria-selected="false">Hospitality &amp; Service</button>
   </div>
 
-  <div class="grid">
+  <div class="grid" id="cardGrid">
 
-    <article class="card card--navy" data-cat="hospitality">
+    <article class="card card--peri" data-cat="hospitality" data-loc="exeter">
       <div class="card__stamp">EXETER<br>2025–</div>
       <h3 class="card__role">Front of House Team Member</h3>
       <div class="card__org">Pho Restaurant · Exeter, UK · Nov 2025–Present</div>
@@ -583,7 +656,7 @@ footer .section__title{color:var(--paper);}
       <div class="card__tags"><span>Customer Service</span><span>Communication</span></div>
     </article>
 
-    <article class="card card--gold" data-cat="business">
+    <article class="card card--gold" data-cat="business" data-loc="bangkok">
       <div class="card__stamp">THAILAND<br>2024</div>
       <h3 class="card__role">Business Development Specialist</h3>
       <div class="card__org">TGB · Thailand · Apr–Jun 2024</div>
@@ -591,7 +664,7 @@ footer .section__title{color:var(--paper);}
       <div class="card__tags"><span>Business Strategy</span><span>Marketing</span><span>Pitching</span></div>
     </article>
 
-    <article class="card card--sage" data-cat="community">
+    <article class="card card--mint" data-cat="community" data-loc="bangkok">
       <div class="card__stamp">BANGKOK<br>2023</div>
       <h3 class="card__role">UNFCCC Event Assistant</h3>
       <div class="card__org">ADB Greater Mekong CCESP · Bangkok, TH · Jul 2023</div>
@@ -599,7 +672,7 @@ footer .section__title{color:var(--paper);}
       <div class="card__tags"><span>Event Coordination</span><span>Note-taking</span><span>Climate Policy</span></div>
     </article>
 
-    <article class="card card--coral" data-cat="community">
+    <article class="card card--coral" data-cat="community" data-loc="bangkok">
       <div class="card__stamp">BANGKOK<br>2022–23</div>
       <h3 class="card__role">Nang Lerng Immersive Exhibition</h3>
       <div class="card__org">Project Manager / Product Owner · Oct 2022–Apr 2023</div>
@@ -608,7 +681,7 @@ footer .section__title{color:var(--paper);}
       <a class="card__link" href="#project">Read the full project story ↓</a>
     </article>
 
-    <article class="card card--sage" data-cat="community">
+    <article class="card card--mint" data-cat="community" data-loc="bangkok">
       <div class="card__stamp">BANGKOK<br>2023</div>
       <h3 class="card__role">Fundraising Coordinator</h3>
       <div class="card__org">Bangkok Design Week · Bangkok, TH · Jan–Feb 2023</div>
@@ -616,7 +689,7 @@ footer .section__title{color:var(--paper);}
       <div class="card__tags"><span>Fundraising</span><span>Arts Production</span><span>Community Engagement</span></div>
     </article>
 
-    <article class="card card--gold" data-cat="research">
+    <article class="card card--gold" data-cat="research" data-loc="bangkok">
       <div class="card__stamp">BANGKOK<br>2022</div>
       <h3 class="card__role">Moderator</h3>
       <div class="card__org">School of Global Studies, Thammasat University · May 2022</div>
@@ -624,7 +697,7 @@ footer .section__title{color:var(--paper);}
       <div class="card__tags"><span>Public Speaking</span><span>Facilitation</span></div>
     </article>
 
-    <article class="card card--navy" data-cat="research">
+    <article class="card card--peri" data-cat="research" data-loc="osaka">
       <div class="card__stamp">OSAKA<br>2021–22</div>
       <h3 class="card__role">TU–OCU International Exchange Program</h3>
       <div class="card__org">Osaka University · Remote · Nov 2021–Jan 2022</div>
@@ -632,7 +705,7 @@ footer .section__title{color:var(--paper);}
       <div class="card__tags"><span>Research</span><span>Branding</span><span>SDGs</span></div>
     </article>
 
-    <article class="card card--sage" data-cat="research advocacy">
+    <article class="card card--mint" data-cat="research advocacy" data-loc="delft">
       <div class="card__stamp">DELFT<br>2021</div>
       <h3 class="card__role">Manifesto for a Just City Workshop</h3>
       <div class="card__org">TU Delft — Industrial Design Engineering · Oct 2021</div>
@@ -648,7 +721,7 @@ footer .section__title{color:var(--paper);}
       <div class="card__tags"><span>Human-Centred Design</span><span>Mental Health Advocacy</span><span>Teamwork</span></div>
     </article>
 
-    <article class="card card--gold" data-cat="business">
+    <article class="card card--gold" data-cat="business" data-loc="bangkok">
       <div class="card__stamp">BANGKOK<br>2021</div>
       <h3 class="card__role">UX Design &amp; Product Intern</h3>
       <div class="card__org">Edsy.co · Bangkok, TH · Jun–Jul 2021</div>
@@ -656,7 +729,7 @@ footer .section__title{color:var(--paper);}
       <div class="card__tags"><span>UX Research</span><span>UI Design</span><span>Adobe XD</span></div>
     </article>
 
-    <article class="card card--navy" data-cat="community research">
+    <article class="card card--peri" data-cat="community research" data-loc="bangkok">
       <div class="card__stamp">BANGKOK<br>2021</div>
       <h3 class="card__role">LIMELIGHT: Public Safety Service Design</h3>
       <div class="card__org">School of Global Studies, Thammasat University · Feb–May 2021</div>
@@ -665,7 +738,7 @@ footer .section__title{color:var(--paper);}
       <a class="card__link" href="#case-study">Read the full case study ↓</a>
     </article>
 
-    <article class="card card--sage" data-cat="research advocacy">
+    <article class="card card--mint" data-cat="research advocacy">
       <div class="card__stamp">GLOBAL<br>2021</div>
       <h3 class="card__role">International Girls in ICT Participant</h3>
       <div class="card__org">International Telecommunication Union · Apr 2021</div>
@@ -673,7 +746,7 @@ footer .section__title{color:var(--paper);}
       <div class="card__tags"><span>Gender Equity</span><span>Human Rights</span><span>Sustainable Development</span></div>
     </article>
 
-    <article class="card card--gold" data-cat="research advocacy">
+    <article class="card card--gold" data-cat="research advocacy" data-loc="seoul">
       <div class="card__stamp">SEOUL<br>2021</div>
       <h3 class="card__role">Global Engagement &amp; Empowerment Forum</h3>
       <div class="card__org">Yonsei University · Feb 2021</div>
@@ -681,7 +754,7 @@ footer .section__title{color:var(--paper);}
       <div class="card__tags"><span>Human Rights</span><span>Teamwork</span><span>Sustainable Development</span></div>
     </article>
 
-    <article class="card card--coral" data-cat="research">
+    <article class="card card--coral" data-cat="research" data-loc="lampang">
       <div class="card__stamp">LAMPANG<br>2020</div>
       <h3 class="card__role">Ethnographic Research Project — Researcher</h3>
       <div class="card__org">School of Global Studies, Thammasat University · Jan–Mar 2020</div>
@@ -689,7 +762,7 @@ footer .section__title{color:var(--paper);}
       <div class="card__tags"><span>Qualitative Research</span><span>Fieldwork</span></div>
     </article>
 
-    <article class="card card--navy" data-cat="community advocacy">
+    <article class="card card--peri" data-cat="community advocacy" data-loc="bangkok">
       <div class="card__stamp">BANGKOK<br>2019–20</div>
       <h3 class="card__role">Head Event Coordinator</h3>
       <div class="card__org">Run2GetherxThammasat · Nov 2019–Jan 2020</div>
@@ -700,7 +773,7 @@ footer .section__title{color:var(--paper);}
   </div>
 </section>
 
-<section id="education" class="education reveal">
+<section id="education" class="reveal">
   <div class="section__label">Education</div>
   <h2 class="section__title">From global studies to psychology</h2>
   <div class="edu-grid">
@@ -717,15 +790,37 @@ footer .section__title{color:var(--paper);}
   </div>
 </section>
 
-<section id="research" class="dissertation reveal">
+<section id="research" class="reveal">
   <div class="section__label">Featured Research</div>
   <h2 class="section__title">MSc Dissertation: Decentering, Mindfulness &amp; Rumination</h2>
   <div class="diss-grid">
     <div class="diss-text">
       <p>My dissertation asked a question I found both scientifically and personally compelling: how does mindfulness relate to repetitive negative thinking — and what process might explain that link? I focused on three constructs: <strong>mindfulness</strong>, <strong>decentering</strong> (the ability to step back from thoughts and view them as temporary mental events rather than facts), and <strong>rumination</strong>.</p>
-      <p>Using a cross-sectional online survey distributed through Qualtrics and Prolific, I recruited 310 participants and, after data cleaning, worked with a final sample of 283 UK-based young adults aged 18–30. Each completed validated measures of mindfulness, decentering and rumination, which I analysed using correlation and mediation models.</p>
+      <p>Using a cross-sectional online survey distributed through Qualtrics and Prolific, I recruited 310 participants and, after data cleaning, worked with a final sample of <span class="count" data-target="283">0</span> UK-based young adults aged 18–30. Each completed validated measures of mindfulness, decentering and rumination, which I analysed using correlation and mediation models.</p>
       <p>Mindfulness was positively associated with decentering, and decentering was associated with lower rumination — though mindfulness itself showed a small positive association with rumination in this sample. The mediation analysis pointed to decentering as the key mechanism: mindfulness related to lower rumination specifically through the ability to step back from thoughts, not simply through noticing them more.</p>
       <p>The project reinforced something I keep returning to in my work: awareness alone isn't always enough — how we relate to our thoughts may matter just as much as whether we notice them. It sharpened my skills in research design, ethics, survey development, participant recruitment, data cleaning, statistical analysis and communicating findings clearly. I'm grateful to the University of Exeter Psychology faculty for funding the participant recruitment that made this research possible.</p>
+
+      <div class="med-diagram">
+        <div class="med-diagram__controls">
+          <button class="med-toggle active" data-path="indirect">Indirect path — via decentering</button>
+          <button class="med-toggle" data-path="direct">Direct path — mindfulness alone</button>
+        </div>
+        <svg class="med-svg" viewBox="0 0 640 190" role="img" aria-label="Mediation diagram showing how mindfulness relates to rumination, directly and via decentering">
+          <g class="med-box"><rect x="10" y="65" width="170" height="60" rx="8"/><text x="95" y="100" text-anchor="middle">Mindfulness</text></g>
+          <g class="med-box"><rect x="235" y="65" width="170" height="60" rx="8"/><text x="320" y="100" text-anchor="middle">Decentering</text></g>
+          <g class="med-box"><rect x="460" y="65" width="170" height="60" rx="8"/><text x="545" y="100" text-anchor="middle">Rumination</text></g>
+
+          <path class="med-path path-indirect is-active" id="pathA" d="M180,95 L235,95"/>
+          <polygon class="med-arrow indirect is-active" id="arrowA" points="228,89 238,95 228,101"/>
+          <path class="med-path path-indirect is-active" id="pathB" d="M405,95 L460,95"/>
+          <polygon class="med-arrow indirect is-active" id="arrowB" points="453,89 463,95 453,101"/>
+
+          <path class="med-path path-direct" id="pathC" d="M95,65 C 95,15 545,15 545,65"/>
+          <polygon class="med-arrow direct" id="arrowC" points="538,62 548,68 540,75"/>
+        </svg>
+        <p class="med-diagram__caption" id="medCaption">Decentering carries mindfulness's effect: more mindfulness related to more decentering, which in turn related to lower rumination.</p>
+      </div>
+
     </div>
     <div class="diss-file">
       <div class="diss-file__header">
@@ -738,7 +833,7 @@ footer .section__title{color:var(--paper);}
       </dl>
       <dl class="diss-stat">
         <dt>Sample</dt>
-        <dd>283 UK adults, aged 18–30 (310 recruited)</dd>
+        <dd><span class="count" data-target="283">0</span> UK adults, aged 18–30 (310 recruited)</dd>
       </dl>
       <dl class="diss-stat">
         <dt>Constructs</dt>
@@ -760,7 +855,7 @@ footer .section__title{color:var(--paper);}
   </div>
 </section>
 
-<section id="case-study" class="dissertation reveal">
+<section id="case-study" class="reveal">
   <div class="section__label">Featured UX Case Study</div>
   <h2 class="section__title">LIMELIGHT: Designing for Perceived Safety in Bangkok</h2>
   <div class="diss-grid">
@@ -793,7 +888,7 @@ footer .section__title{color:var(--paper);}
       </dl>
       <dl class="diss-stat">
         <dt>Usability result</dt>
-        <dd>86% System Usability Scale · 7s avg. to activate alert</dd>
+        <dd><span class="count" data-target="86" data-suffix="%">0%</span> System Usability Scale · <span class="count" data-target="7" data-suffix="s">0s</span> avg. to activate alert</dd>
       </dl>
       <div class="diss-finding">
         <span>Key finding</span>
@@ -804,7 +899,7 @@ footer .section__title{color:var(--paper);}
   </div>
 </section>
 
-<section id="project" class="dissertation reveal">
+<section id="project" class="reveal">
   <div class="section__label">Featured Project</div>
   <h2 class="section__title">Nang Lerng Immersive Exhibition: Building for Handover</h2>
   <div class="diss-grid">
@@ -825,15 +920,15 @@ footer .section__title{color:var(--paper);}
       </dl>
       <dl class="diss-stat">
         <dt>New activities revenue</dt>
-        <dd>~29,250 THB across 4 new experiences</dd>
+        <dd><span class="count" data-target="29250">0</span> THB across 4 new experiences</dd>
       </dl>
       <dl class="diss-stat">
         <dt>Social growth (90 days)</dt>
-        <dd>230.6K reach (+848%) · 88.2K engagement (+1234%)</dd>
+        <dd><span class="count" data-target="230.6" data-decimals="1" data-suffix="K">0K</span> reach (+848%) · <span class="count" data-target="88.2" data-decimals="1" data-suffix="K">0K</span> engagement (+1234%)</dd>
       </dl>
       <dl class="diss-stat">
         <dt>Media</dt>
-        <dd>18 of 63 outlets confirmed coverage</dd>
+        <dd><span class="count" data-target="18">0</span> of 63 outlets confirmed coverage</dd>
       </dl>
       <dl class="diss-stat">
         <dt>Handover</dt>
@@ -843,11 +938,16 @@ footer .section__title{color:var(--paper);}
         <span>Key lesson</span>
         Authority doesn't make a leader — legitimacy built through relationships and shared goals is what makes cross-functional collaboration work.
       </div>
+      <div class="diss-links">
+        <a class="card__link" href="https://www.bangkokpost.com/life/social-and-lifestyle/2546681/learn-about-bangkoks-nang-loeng-community" target="_blank" rel="noopener">Read the Bangkok Post feature ↗</a>
+        <a class="card__link" href="https://urbancreature.co/nang-lerng-immersive-exhibition/" target="_blank" rel="noopener">Read the Urban Creature feature ↗</a>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="skills reveal">
+<section class="reveal">
+  <div class="section__label">Skills</div>
   <h2 class="section__title">What I bring to a team</h2>
   <div class="skills__groups">
     <div class="skills__group">
@@ -887,12 +987,13 @@ footer .section__title{color:var(--paper);}
       </ul>
     </div>
     <div class="skills__group">
-      <h4>Tools</h4>
+      <h4>Tools &amp; Data</h4>
       <ul>
         <li>Adobe XD</li>
+        <li>SQL &amp; data tables</li>
+        <li>Tableau</li>
         <li>Microsoft Office &amp; Excel</li>
         <li>Prototyping tools</li>
-        <li>Social media platforms</li>
       </ul>
     </div>
   </div>
@@ -905,8 +1006,11 @@ footer .section__title{color:var(--paper);}
     <div class="footer__item">Phone
       <a href="tel:+447899056477">07899 056477</a>
     </div>
+    <div class="footer__item">Email
+      <a href="mailto:nichatorn.u@gmail.com">nichatorn.u@gmail.com</a>
+    </div>
     <div class="footer__item">Location
-      <a href="#">Exeter, England, UK</a>
+      <span>Exeter, England, UK — open to relocating anywhere</span>
     </div>
     <div class="footer__item">LinkedIn
       <a href="https://www.linkedin.com/in/nichatorn-uphonthian-60534820b/" target="_blank" rel="noopener">Nichatorn Uphonthian</a>
@@ -916,37 +1020,148 @@ footer .section__title{color:var(--paper);}
 </footer>
 
 <script>
-// Filter tabs
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---- Filter tabs with sliding pill ---- */
+const tabsEl = document.getElementById('tabs');
+const pill = document.getElementById('tabsPill');
 const tabs = document.querySelectorAll('.tab');
 const cards = document.querySelectorAll('.card');
+
+function movePill(tab){
+  const tr = tab.getBoundingClientRect();
+  const pr = tabsEl.getBoundingClientRect();
+  pill.style.width = tr.width + 'px';
+  pill.style.height = tr.height + 'px';
+  pill.style.transform = `translate(${tr.left - pr.left}px, ${tr.top - pr.top}px)`;
+}
+
+function setActiveTab(tab){
+  tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+  tab.classList.add('active');
+  tab.setAttribute('aria-selected','true');
+  movePill(tab);
+}
+
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
-    tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
-    tab.classList.add('active');
-    tab.setAttribute('aria-selected','true');
+    setActiveTab(tab);
     const filter = tab.dataset.filter;
     cards.forEach(card => {
       const cats = card.dataset.cat.split(' ');
-      if(filter === 'all' || cats.includes(filter)){
-        card.classList.remove('hidden');
-      } else {
-        card.classList.add('hidden');
-      }
+      card.classList.toggle('hidden', !(filter === 'all' || cats.includes(filter)));
     });
   });
 });
 
-// Reveal on scroll
-const revealEls = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
+window.addEventListener('load', () => movePill(document.querySelector('.tab.active')));
+window.addEventListener('resize', () => movePill(document.querySelector('.tab.active')));
+
+/* ---- Constellation: click a city to filter + spotlight ---- */
+document.querySelectorAll('.node').forEach(node => {
+  const city = node.dataset.city;
+  const activate = () => {
+    document.getElementById('journey').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+    setActiveTab(document.querySelector('.tab[data-filter="all"]'));
+    cards.forEach(c => c.classList.remove('hidden'));
+    cards.forEach(c => c.classList.toggle('spotlight', c.dataset.loc === city));
+    setTimeout(() => cards.forEach(c => c.classList.remove('spotlight')), 2600);
+  };
+  node.addEventListener('click', activate);
+  node.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
+  });
+});
+
+/* ---- Mediation diagram toggle ---- */
+const medToggles = document.querySelectorAll('.med-toggle');
+const medCaption = document.getElementById('medCaption');
+const captions = {
+  indirect: "Decentering carries mindfulness's effect: more mindfulness related to more decentering, which in turn related to lower rumination.",
+  direct: "On its own, mindfulness showed a small positive association with rumination — awareness without distance can sometimes backfire."
+};
+medToggles.forEach(btn => {
+  btn.addEventListener('click', () => {
+    medToggles.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const path = btn.dataset.path;
+    medCaption.textContent = captions[path];
+    document.querySelectorAll('.med-path, .med-arrow').forEach(el => el.classList.remove('is-active'));
+    if(path === 'indirect'){
+      document.querySelectorAll('.path-indirect, .indirect').forEach(el => el.classList.add('is-active'));
+    } else {
+      document.querySelectorAll('.path-direct, .direct').forEach(el => el.classList.add('is-active'));
     }
   });
-}, { threshold: 0.15 });
-revealEls.forEach(el => observer.observe(el));
+});
+
+/* ---- Count-up numbers ---- */
+function animateCount(el){
+  const target = parseFloat(el.dataset.target);
+  const decimals = el.dataset.decimals ? parseInt(el.dataset.decimals, 10) : 0;
+  const suffix = el.dataset.suffix || '';
+  if(reduceMotion){
+    el.textContent = (decimals ? target.toFixed(decimals) : target.toLocaleString()) + suffix;
+    return;
+  }
+  const duration = 1200;
+  const startTime = performance.now();
+  function step(now){
+    const p = Math.min((now - startTime) / duration, 1);
+    const eased = 1 - Math.pow(1 - p, 3);
+    const val = target * eased;
+    el.textContent = (decimals ? val.toFixed(decimals) : Math.round(val).toLocaleString()) + suffix;
+    if(p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){ animateCount(entry.target); countObserver.unobserve(entry.target); }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.count').forEach(el => countObserver.observe(el));
+
+/* ---- Reveal on scroll ---- */
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){ entry.target.classList.add('visible'); revealObserver.unobserve(entry.target); }
+  });
+}, { threshold: 0, rootMargin: '0px 0px -10% 0px' });
+revealEls.forEach(el => revealObserver.observe(el));
+
+/* ---- Scroll-spy nav ---- */
+const navLinks = document.querySelectorAll('.nav__links a');
+const navIndicator = document.getElementById('navIndicator');
+const navLinksEl = document.getElementById('navLinks');
+const sections = Array.from(navLinks).map(a => document.querySelector(a.getAttribute('href')));
+
+function moveNavIndicator(link){
+  if(window.innerWidth <= 880) return;
+  const lr = link.getBoundingClientRect();
+  const pr = navLinksEl.getBoundingClientRect();
+  navIndicator.style.width = lr.width + 'px';
+  navIndicator.style.transform = `translateX(${lr.left - pr.left}px)`;
+}
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const id = '#' + entry.target.id;
+      navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === id));
+      const activeLink = document.querySelector(`.nav__links a[href="${id}"]`);
+      if(activeLink) moveNavIndicator(activeLink);
+    }
+  });
+}, { rootMargin: '-15% 0px -75% 0px' });
+sections.forEach(s => { if(s) sectionObserver.observe(s); });
+
+window.addEventListener('resize', () => {
+  const active = document.querySelector('.nav__links a.active') || navLinks[0];
+  moveNavIndicator(active);
+});
+window.addEventListener('load', () => moveNavIndicator(navLinks[0]));
 </script>
 
 </body>
