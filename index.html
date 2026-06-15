@@ -442,6 +442,247 @@ section{padding:80px 6vw;}
   max-width:60ch;
 }
 
+/* ===== INTERACTIVE PROTOTYPE (LIMELIGHT) ===== */
+.proto-section{margin-top:56px; padding-top:48px; border-top:1px dashed var(--border);}
+.proto-heading{
+  font-family:var(--serif);
+  font-weight:600;
+  font-size:1.3rem;
+  margin-bottom:10px;
+}
+.proto-lead{
+  color:var(--text-soft);
+  font-size:0.96rem;
+  max-width:64ch;
+  margin-bottom:32px;
+}
+.proto-wrap{
+  display:flex;
+  gap:40px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+.proto-device{
+  position:relative;
+  width:272px; height:560px;
+  flex-shrink:0;
+  margin:0 auto;
+  border-radius:38px;
+  border:10px solid var(--bg);
+  background:var(--bg);
+  box-shadow:0 24px 60px rgba(0,0,0,0.45), 0 0 0 1px var(--border-strong);
+  overflow:hidden;
+}
+.proto-notch{
+  position:absolute; top:0; left:50%; transform:translateX(-50%);
+  width:120px; height:20px; background:var(--bg);
+  border-radius:0 0 12px 12px; z-index:10;
+}
+.proto-screen{
+  position:absolute; inset:0;
+  padding:34px 20px 22px;
+  display:flex; flex-direction:column;
+  opacity:0; transform:translateX(24px);
+  transition:opacity 0.35s ease, transform 0.35s ease;
+  pointer-events:none;
+}
+.proto-screen.active{opacity:1; transform:translateX(0); pointer-events:auto; z-index:2;}
+.proto-screen--gold{background:var(--gold); color:#26190A;}
+.proto-screen--light{background:#FBF6EC; color:#26190A;}
+.proto-screen--activate{background:linear-gradient(180deg, var(--gold) 0%, #F8E7C4 62%, #FBF6EC 100%); color:#26190A;}
+.proto-screen--dark{background:#3F5C53; color:var(--cream);}
+.proto-screen--white{background:#FFFFFF; color:#26190A;}
+
+.proto-brand{
+  position:absolute; top:18px; right:20px;
+  font-family:var(--serif); font-weight:700; font-size:0.74rem;
+  letter-spacing:0.05em; text-transform:uppercase;
+}
+.proto-screen--gold .proto-brand, .proto-screen--activate .proto-brand{color:#26190A;}
+.proto-screen--light .proto-brand, .proto-screen--white .proto-brand{color:var(--gold);}
+.proto-screen--dark .proto-brand{color:var(--gold);}
+
+.proto-icon{font-size:2.2rem; margin-bottom:auto; margin-top:18px;}
+.proto-h1{
+  font-family:var(--serif);
+  font-weight:800;
+  font-size:1.5rem;
+  line-height:1.18;
+  margin-bottom:10px;
+}
+.proto-h1--condensed{font-weight:800; font-size:1.55rem; letter-spacing:0.01em;}
+.proto-h1--gold{color:var(--gold);}
+.proto-h1--dark{color:#3F5C53;}
+.proto-p{font-size:0.86rem; line-height:1.45; color:inherit; opacity:0.85;}
+.proto-p--bold{font-weight:600; opacity:1; margin-top:8px;}
+
+.proto-btn{
+  margin-top:auto;
+  border:none; border-radius:999px;
+  padding:14px 18px;
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:0.84rem;
+  cursor:pointer;
+  text-align:center;
+  transition:transform 0.15s ease;
+}
+.proto-btn:hover{transform:translateY(-1px);}
+.proto-btn--dark{background:#26190A; color:var(--cream);}
+.proto-btn--gold{background:var(--gold); color:#26190A;}
+.proto-btn--coral{background:var(--coral); color:#fff;}
+
+/* Emergency button screen */
+.proto-press-wrap{flex:1; display:flex; align-items:center; justify-content:center; position:relative;}
+.proto-press{
+  position:relative;
+  width:160px; height:160px;
+  border-radius:50%;
+  background:var(--coral);
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  font-family:var(--serif);
+  font-weight:800;
+  font-size:1.15rem;
+  letter-spacing:0.06em;
+  box-shadow:0 0 0 14px rgba(238,134,105,0.16), 0 0 0 28px rgba(238,134,105,0.08);
+}
+.proto-press::after{
+  content:'';
+  position:absolute; inset:-30px;
+  border-radius:50%;
+  border:2px solid rgba(238,134,105,0.3);
+  animation:protoPulse 2.6s ease-out infinite;
+}
+@keyframes protoPulse{
+  0%{transform:scale(0.82); opacity:0.65;}
+  100%{transform:scale(1.18); opacity:0;}
+}
+.proto-actions{display:flex; gap:8px; margin-top:14px;}
+.proto-chip{
+  flex:1;
+  background:rgba(238,134,105,0.14);
+  color:var(--coral);
+  font-family:var(--mono);
+  font-size:0.6rem;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  text-align:center;
+  border-radius:10px;
+  padding:10px 6px;
+}
+.proto-chip--wide{display:block; margin-top:8px;}
+.proto-chip--coral{background:rgba(255,255,255,0.5); color:#A6432F;}
+
+/* Modal overlay (code verification) */
+.proto-overlay{
+  position:absolute; inset:0;
+  background:rgba(38,25,10,0.32);
+}
+.proto-modal{
+  position:relative; z-index:2;
+  margin-top:auto;
+  background:#FBF6EC;
+  border:2px solid var(--coral);
+  border-radius:16px;
+  padding:22px 18px;
+  text-align:center;
+}
+.proto-modal--light{border-color:var(--gold);}
+.proto-modal__close{
+  position:absolute; top:10px; right:10px;
+  width:22px; height:22px; border-radius:50%;
+  border:none; cursor:pointer;
+  background:var(--coral); color:#fff;
+  font-size:0.8rem; line-height:1;
+}
+.proto-modal--light .proto-modal__close{background:var(--gold); color:#26190A;}
+.proto-modal__title{
+  font-family:var(--serif); font-weight:700; font-size:1.1rem;
+  color:var(--coral); margin-bottom:8px;
+}
+.proto-modal--light .proto-modal__title{color:var(--coral);}
+.proto-modal__text{font-size:0.8rem; color:#5C6B63; margin-bottom:14px;}
+.proto-code{display:flex; gap:8px; justify-content:center; margin-bottom:16px;}
+.proto-code span{
+  width:34px; height:40px;
+  border:1.5px solid var(--gold);
+  border-radius:6px;
+}
+
+/* Activated screen */
+.proto-status-banner{
+  font-size:0.92rem; font-weight:700; margin-top:18px;
+  line-height:1.3;
+}
+.proto-status-banner strong{color:var(--coral);}
+.proto-status-box{
+  margin-top:12px;
+  background:rgba(255,255,255,0.55);
+  border-radius:12px;
+  padding:14px;
+  font-size:0.84rem;
+  color:#7A4A2A;
+  line-height:1.45;
+}
+.proto-status-label{
+  display:block;
+  font-family:var(--mono); font-size:0.6rem;
+  text-transform:uppercase; letter-spacing:0.12em;
+  color:var(--coral); margin-bottom:6px;
+}
+.proto-safe-wrap{flex:1; display:flex; align-items:center; justify-content:center;}
+.proto-safe{
+  width:110px; height:110px; border-radius:50%;
+  background:#3F5C53; color:var(--gold);
+  border:3px solid var(--gold);
+  font-family:var(--serif); font-weight:800; font-size:0.92rem;
+  line-height:1.2; cursor:pointer;
+}
+
+/* Success / confirm-safe screens */
+.proto-smiley{font-size:2.4rem; text-align:center; margin-top:24px; margin-bottom:14px;}
+.proto-smiley--badge{
+  width:64px; height:64px; line-height:64px;
+  background:var(--gold); border-radius:18px;
+  margin:24px auto 14px; font-size:1.8rem;
+}
+.proto-confetti{
+  position:absolute; top:14px; left:18px; right:18px;
+  font-size:1.1rem; opacity:0.7; text-align:center;
+  letter-spacing:10px;
+}
+
+/* Step list */
+.proto-steps{
+  list-style:none;
+  display:flex; flex-direction:column; gap:10px;
+  min-width:180px;
+}
+.proto-steps li{
+  font-family:var(--mono);
+  font-size:0.72rem;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color:var(--text-soft);
+  cursor:pointer;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  transition:color 0.2s, border-color 0.2s, background 0.2s;
+}
+.proto-steps li:hover{color:var(--cream); border-color:var(--border-strong);}
+.proto-steps li.active{
+  color:var(--bg);
+  background:var(--gold);
+  border-color:transparent;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .proto-press::after{animation:none;}
+}
+
 /* ===== OFFER / WHAT I BRING ===== */
 .offer-grid{
   display:grid;
@@ -570,8 +811,8 @@ footer .section__label{color:var(--gold);}
     <span class="nav__indicator" id="navIndicator"></span>
     <a href="#offer">Offer</a>
     <a href="#about">About</a>
-    <a href="#journey">Journey</a>
     <a href="#education">Education</a>
+    <a href="#journey">Journey</a>
     <a href="#research">Research</a>
     <a href="#case-study">Case Study</a>
     <a href="#project">Project</a>
@@ -714,7 +955,7 @@ footer .section__label{color:var(--gold);}
 <section id="about" class="about reveal">
   <div class="about__text">
     <div class="section__label">About</div>
-    <h2 class="section__title">Psychology, social entrepreneurship, and six years of people-first work</h2>
+    <h2 class="section__title">Psychology, social entrepreneurship, and six years of human-centric work</h2>
     <p>I'm a Psychology graduate (MSc, University of Exeter) with a background in Social Entrepreneurship — six years designing and delivering wellbeing, community engagement and social impact work across Thailand, Japan and the UK, from a 30-person exhibition team in Bangkok to UX research on perceived safety in a Bangkok neighbourhood.</p>
     <p>My dissertation research focused on mindfulness, decentering and rumination — and that evidence-led approach runs through everything I do, whether it's a UX case study tested with real participants or a community project designed for sustainable handover rather than a one-off event.</p>
     <p>I'm drawn to work where psychology, human rights and inclusive design meet — and I bring practical tools to make that real, from SQL, Tableau and Qualtrics for data, to Adobe XD for prototyping. I'm currently looking for roles where research rigour, design practice and a genuine commitment to inclusion can contribute to products, services or programmes that matter to the people who use them.</p>
@@ -731,6 +972,25 @@ footer .section__label{color:var(--gold);}
     <dt>Recognised in</dt>
     <dd>Bangkok Post · Time Out Bangkok · The Standard · Urban Creature · Thai PBS</dd>
   </dl>
+</section>
+
+
+
+<section id="education" class="reveal">
+  <div class="section__label">Education</div>
+  <h2 class="section__title">From global studies to psychology</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <h3>MSc Psychology Conversion</h3>
+      <div class="edu-meta">University of Exeter · Sep 2024 – Dec 2025 · Completed</div>
+      <p>A research-led conversion programme building core psychological knowledge and methods, with a particular focus on mental health and wellbeing — bridging into a career already rooted in human rights advocacy, disability inclusion and community-based research.</p>
+    </div>
+    <div class="edu-card">
+      <h3>BA Global Studies &amp; Social Entrepreneurship</h3>
+      <div class="edu-meta">School of Global Studies, Thammasat University · Aug 2019 – Aug 2023</div>
+      <p>A multidisciplinary degree spanning sustainable development, urban studies and social enterprise — the launchpad for fieldwork, exchanges and community projects across Thailand and abroad.</p>
+    </div>
+  </div>
 </section>
 
 <section id="journey">
@@ -874,23 +1134,6 @@ footer .section__label{color:var(--gold);}
   </div>
 </section>
 
-<section id="education" class="reveal">
-  <div class="section__label">Education</div>
-  <h2 class="section__title">From global studies to psychology</h2>
-  <div class="edu-grid">
-    <div class="edu-card">
-      <h3>MSc Psychology Conversion</h3>
-      <div class="edu-meta">University of Exeter · Sep 2024 – Dec 2025 · Completed</div>
-      <p>A research-led conversion programme building core psychological knowledge and methods, with a particular focus on mental health and wellbeing — bridging into a career already rooted in human rights advocacy, disability inclusion and community-based research.</p>
-    </div>
-    <div class="edu-card">
-      <h3>BA Global Studies &amp; Social Entrepreneurship</h3>
-      <div class="edu-meta">School of Global Studies, Thammasat University · Aug 2019 – Aug 2023</div>
-      <p>A multidisciplinary degree spanning sustainable development, urban studies and social enterprise — the launchpad for fieldwork, exchanges and community projects across Thailand and abroad.</p>
-    </div>
-  </div>
-</section>
-
 <section id="research" class="reveal">
   <div class="section__label">Featured Research</div>
   <h2 class="section__title">MSc Dissertation: Decentering, Mindfulness &amp; Rumination</h2>
@@ -998,6 +1241,101 @@ footer .section__label{color:var(--gold);}
       <a class="card__link" href="https://drive.google.com/file/d/1zbnM5f0cEeOd-5RaZyd-N5iV4Lzh4hIf/view" target="_blank" rel="noopener">View full case study report ↗</a>
     </div>
   </div>
+
+  <div class="proto-section">
+    <h3 class="proto-heading">Try the safety flow</h3>
+    <p class="proto-lead">Below is a walkthrough of the Adobe XD prototype I designed for LIMELIGHT — the same flow I tested with five participants for the System Usability Scale and alert-activation timing. Tap through each screen to follow a user from a safe walk home to triggering, and clearing, an emergency alert.</p>
+    <div class="proto-wrap">
+      <div class="proto-device">
+        <div class="proto-notch"></div>
+
+        <div class="proto-screen proto-screen--gold active" data-screen="home">
+          <div class="proto-brand">Limelight</div>
+          <div class="proto-icon">🚨</div>
+          <h3 class="proto-h1">LET US BE YOUR<br>WALK HOME BUDDY</h3>
+          <p class="proto-p">Just a few minutes for your safety. No worries, we've got your back!</p>
+          <button class="proto-btn proto-btn--dark" data-next="emergency">Start Now</button>
+        </div>
+
+        <div class="proto-screen proto-screen--light" data-screen="emergency">
+          <div class="proto-brand">Limelight</div>
+          <h3 class="proto-h1 proto-h1--condensed">EMERGENCY<br>BUTTON</h3>
+          <p class="proto-p">Press the button below when you are not safe.</p>
+          <div class="proto-press-wrap">
+            <button class="proto-press" data-next="confirm-emergency">PRESS</button>
+          </div>
+          <div class="proto-actions">
+            <span class="proto-chip">Call Police</span>
+            <span class="proto-chip">Emergency Contact</span>
+          </div>
+          <span class="proto-chip proto-chip--wide">MAP</span>
+        </div>
+
+        <div class="proto-screen proto-screen--light" data-screen="confirm-emergency">
+          <div class="proto-brand">Limelight</div>
+          <h3 class="proto-h1 proto-h1--condensed">EMERGENCY<br>BUTTON</h3>
+          <p class="proto-p">Tap the button above when you are not safe.</p>
+          <div class="proto-overlay"></div>
+          <div class="proto-modal">
+            <button class="proto-modal__close" data-next="emergency" aria-label="Close">×</button>
+            <h4 class="proto-modal__title">It's ME code</h4>
+            <p class="proto-modal__text">Enter the code to verify that this is you and prevent an accidental click.</p>
+            <div class="proto-code"><span></span><span></span><span></span><span></span></div>
+            <button class="proto-btn proto-btn--coral" data-next="activated">Confirm</button>
+          </div>
+        </div>
+
+        <div class="proto-screen proto-screen--activate" data-screen="activated">
+          <div class="proto-brand">Limelight</div>
+          <div class="proto-status-banner">The emergency light is now <strong>ACTIVATING</strong></div>
+          <div class="proto-status-box">
+            <span class="proto-status-label">Status</span>
+            The emergency alert has been sent to nearby users — Koko is on the way. Hang in there!
+          </div>
+          <div class="proto-safe-wrap">
+            <button class="proto-safe" data-next="confirm-safe">I'M<br>SAFE</button>
+          </div>
+          <div class="proto-actions">
+            <span class="proto-chip proto-chip--coral">Call Police</span>
+            <span class="proto-chip proto-chip--coral">Emergency Contact</span>
+          </div>
+        </div>
+
+        <div class="proto-screen proto-screen--dark" data-screen="confirm-safe">
+          <div class="proto-brand">Limelight</div>
+          <div class="proto-smiley">🙂</div>
+          <h3 class="proto-h1 proto-h1--gold" style="text-align:center;">I'M SAFE</h3>
+          <div class="proto-modal proto-modal--light">
+            <button class="proto-modal__close" data-next="activated" aria-label="Close">×</button>
+            <h4 class="proto-modal__title">It's ME code</h4>
+            <p class="proto-modal__text">Enter the code to verify that this is you and you are now SAFE.</p>
+            <div class="proto-code"><span></span><span></span><span></span><span></span></div>
+            <button class="proto-btn proto-btn--gold" data-next="success">Confirm</button>
+          </div>
+        </div>
+
+        <div class="proto-screen proto-screen--white" data-screen="success">
+          <div class="proto-brand">Limelight</div>
+          <div class="proto-confetti">🎉 🎊 🎉 🎊 🎉</div>
+          <div class="proto-smiley proto-smiley--badge">🙂</div>
+          <h3 class="proto-h1 proto-h1--dark" style="text-align:center;">HORAYYY!!</h3>
+          <p class="proto-p proto-p--bold" style="text-align:center;">You are now SAFE. Let's go home and get some sleep — you did a GREAT JOB!</p>
+          <button class="proto-btn proto-btn--gold" data-next="home">Thanks!, Back to Home</button>
+        </div>
+
+      </div>
+
+      <ol class="proto-steps" id="protoSteps">
+        <li data-screen="home" class="active">1 · Walk home buddy</li>
+        <li data-screen="emergency">2 · Emergency button</li>
+        <li data-screen="confirm-emergency">3 · Verify it's you</li>
+        <li data-screen="activated">4 · Alert activated</li>
+        <li data-screen="confirm-safe">5 · Confirm you're safe</li>
+        <li data-screen="success">6 · All clear</li>
+      </ol>
+    </div>
+  </div>
+
 </section>
 
 <section id="project" class="reveal">
@@ -1124,6 +1462,20 @@ footer .section__label{color:var(--gold);}
 
 <script>
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---- LIMELIGHT prototype walkthrough ---- */
+const protoScreens = document.querySelectorAll('.proto-screen');
+const protoSteps = document.querySelectorAll('#protoSteps li');
+function showProtoScreen(name){
+  protoScreens.forEach(s => s.classList.toggle('active', s.dataset.screen === name));
+  protoSteps.forEach(li => li.classList.toggle('active', li.dataset.screen === name));
+}
+document.querySelectorAll('.proto-screen [data-next]').forEach(btn => {
+  btn.addEventListener('click', () => showProtoScreen(btn.dataset.next));
+});
+protoSteps.forEach(li => {
+  li.addEventListener('click', () => showProtoScreen(li.dataset.screen));
+});
 
 /* ---- Offer cards: jump to section, optionally applying a journey filter ---- */
 document.querySelectorAll('.offer-card[data-jump]').forEach(card => {
