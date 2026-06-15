@@ -117,6 +117,7 @@ nav{
   font-size:1.02rem;
   color:var(--text-soft);
 }
+.hero__sub strong{color:var(--cream); font-weight:600;}
 .hero__contact{
   margin-top:32px;
   display:flex;
@@ -441,6 +442,62 @@ section{padding:80px 6vw;}
   max-width:60ch;
 }
 
+/* ===== OFFER / WHAT I BRING ===== */
+.offer-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:18px;
+}
+.offer-card{
+  display:block;
+  background:var(--bg-raised);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:24px;
+  text-decoration:none;
+  color:inherit;
+  cursor:pointer;
+  transition:transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.offer-card:hover, .offer-card:focus-visible{
+  transform:translateY(-4px);
+  background:var(--bg-raised-2);
+  border-color:var(--gold);
+  box-shadow:0 16px 32px rgba(232,182,94,0.12);
+}
+.offer-card__tag{
+  font-family:var(--mono);
+  font-size:0.62rem;
+  text-transform:uppercase;
+  letter-spacing:0.16em;
+  color:var(--gold);
+  margin-bottom:10px;
+}
+.offer-card h3{
+  font-family:var(--serif);
+  font-weight:600;
+  font-size:1.16rem;
+  margin-bottom:8px;
+}
+.offer-card p{font-size:0.88rem; color:var(--text-soft);}
+.offer-card__cta{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  margin-top:16px;
+  font-family:var(--mono);
+  font-size:0.66rem;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  color:var(--mint);
+  border-bottom:1px dashed var(--mint);
+  padding-bottom:2px;
+  transition:color 0.2s, border-color 0.2s, gap 0.2s;
+}
+.offer-card:hover .offer-card__cta, .offer-card:focus-visible .offer-card__cta{
+  gap:10px;
+}
+
 /* ===== SKILLS ===== */
 .skills__groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:32px;}
 .skills__group h4{
@@ -462,6 +519,13 @@ footer{
   border-top:1px solid var(--border);
 }
 footer .section__label{color:var(--gold);}
+.footer__intro{
+  font-size:1.02rem;
+  color:var(--text-soft);
+  max-width:62ch;
+  margin-bottom:48px;
+}
+.footer__intro strong{color:var(--cream); font-weight:600;}
 .footer__row{display:flex; flex-wrap:wrap; gap:40px; margin-bottom:60px;}
 .footer__item{font-family:var(--mono); font-size:0.76rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-soft);}
 .footer__item a{
@@ -504,6 +568,7 @@ footer .section__label{color:var(--gold);}
   <div class="nav__name">Nichatorn Uphonthian</div>
   <div class="nav__links" id="navLinks">
     <span class="nav__indicator" id="navIndicator"></span>
+    <a href="#offer">Offer</a>
     <a href="#about">About</a>
     <a href="#journey">Journey</a>
     <a href="#education">Education</a>
@@ -518,7 +583,7 @@ footer .section__label{color:var(--gold);}
   <div class="hero__text">
     <div class="hero__eyebrow">Field notes &amp; case files — Bangkok to Exeter</div>
     <h1>Building bridges between people, <em>places</em> &amp; ideas.</h1>
-    <p class="hero__sub">Psychology &amp; social entrepreneurship graduate, UX/UI researcher &amp; designer, and human rights–minded community organiser — six years of fieldwork spanning grassroots exhibitions, disability-inclusive events, usability testing and UN climate dialogues.</p>
+    <p class="hero__sub">Psychology &amp; social entrepreneurship graduate, UX/UI researcher &amp; designer, and human rights–minded community organiser — six years of fieldwork spanning grassroots exhibitions, disability-inclusive events, usability testing and UN climate dialogues. I'm based in Exeter and open to full-time roles across the UK and beyond, and I also take on freelance and contract work in <strong>business development</strong>, <strong>UX/UI design &amp; support</strong>, and <strong>assistant psychologist</strong> positions.</p>
     <div class="hero__contact">
       <span class="chip">Exeter, UK · open to relocation</span>
       <span class="chip">07899 056477</span>
@@ -609,14 +674,50 @@ footer .section__label{color:var(--gold);}
   </div>
 </section>
 
+<section id="offer" class="offer reveal">
+  <div class="section__label">What I Offer</div>
+  <h2 class="section__title">Five things I bring to a team</h2>
+  <div class="offer-grid">
+    <a class="offer-card" href="#case-study" data-jump>
+      <div class="offer-card__tag">01 · UX Research &amp; Design</div>
+      <h3>Research-led design</h3>
+      <p>Mixed-methods research and Adobe XD prototyping, tested with real users down to the second.</p>
+      <span class="offer-card__cta">LIMELIGHT case study →</span>
+    </a>
+    <a class="offer-card" href="#research" data-jump>
+      <div class="offer-card__tag">02 · Data &amp; Behavioural Research</div>
+      <h3>Evidence you can act on</h3>
+      <p>Survey design, SQL, Tableau and statistical analysis — turning data into findings that hold up.</p>
+      <span class="offer-card__cta">MSc dissertation →</span>
+    </a>
+    <a class="offer-card" href="#project" data-jump>
+      <div class="offer-card__tag">03 · Project &amp; Team Leadership</div>
+      <h3>Delivery, end to end</h3>
+      <p>Leading a 30-person team from concept to a 7-day exhibition — then handing it over so it lasts.</p>
+      <span class="offer-card__cta">Nang Loeng project →</span>
+    </a>
+    <a class="offer-card" href="#journey" data-jump data-filter="business">
+      <div class="offer-card__tag">04 · Business Development &amp; Strategy</div>
+      <h3>Growth, pitches &amp; partnerships</h3>
+      <p>B2B growth strategy, partner pitch decks, marketplace campaigns and brand-building — turning plans into measurable traction.</p>
+      <span class="offer-card__cta">Business Development roles →</span>
+    </a>
+    <a class="offer-card" href="#journey" data-jump data-filter="advocacy">
+      <div class="offer-card__tag">05 · Inclusion &amp; Human Rights</div>
+      <h3>Designing for everyone</h3>
+      <p>Programmes and events built around disability inclusion, mental health and equitable access.</p>
+      <span class="offer-card__cta">Advocacy roles →</span>
+    </a>
+  </div>
+</section>
+
 <section id="about" class="about reveal">
   <div class="about__text">
     <div class="section__label">About</div>
     <h2 class="section__title">Psychology, social entrepreneurship, and six years of people-first work</h2>
-    <p>I'm a Psychology graduate (MSc, University of Exeter) with a background in Social Entrepreneurship and six years designing and delivering wellbeing, community engagement and social impact initiatives across Thailand, Japan and the UK. That combination — behavioural research, stakeholder engagement, project management, user-centred design and cross-cultural communication — has let me lead multidisciplinary teams and deliver inclusive programmes that strengthen participation and community wellbeing, from a 30-person exhibition team in Bangkok to a UX research project on perceived safety in a Bangkok neighbourhood.</p>
-    <p>My research focuses on mental health, mindfulness, psychological decentering and rumination, grounding how I approach evidence-informed design and engagement. That same evidence-led approach carries through everything I do: a dissertation built on validated measures and mediation analysis, a UX case study tested down to the second with real participants, and a community project designed for sustainable handover rather than a one-off event.</p>
-    <p>This combination of psychology and social entrepreneurship has taken me from ethnographic fieldwork in a rural Thai village, to an international workshop on spatial justice in the Netherlands, to a global forum on social innovation in South Korea — each one reinforcing the same lesson: good research and good design both start with listening. Alongside that, I bring practical tools to turn listening into action, from SQL and Tableau for working with data, to Adobe XD for prototyping and Qualtrics for survey design, so insights don't stay as findings but become something usable.</p>
-    <p>I'm drawn to work where psychology, human rights and inclusive design meet — building healthier, more connected workplaces and communities. Whatever the project, the approach stays the same: understand the people involved, ground decisions in evidence, and design for genuine participation rather than just access. I'm currently looking for roles where that combination — research rigour, design practice, and a genuine commitment to inclusion — can contribute to products, services or programmes that matter to the people who use them.</p>
+    <p>I'm a Psychology graduate (MSc, University of Exeter) with a background in Social Entrepreneurship — six years designing and delivering wellbeing, community engagement and social impact work across Thailand, Japan and the UK, from a 30-person exhibition team in Bangkok to UX research on perceived safety in a Bangkok neighbourhood.</p>
+    <p>My dissertation research focused on mindfulness, decentering and rumination — and that evidence-led approach runs through everything I do, whether it's a UX case study tested with real participants or a community project designed for sustainable handover rather than a one-off event.</p>
+    <p>I'm drawn to work where psychology, human rights and inclusive design meet — and I bring practical tools to make that real, from SQL, Tableau and Qualtrics for data, to Adobe XD for prototyping. I'm currently looking for roles where research rigour, design practice and a genuine commitment to inclusion can contribute to products, services or programmes that matter to the people who use them.</p>
   </div>
   <dl class="about__facts">
     <dt>Based in</dt>
@@ -641,7 +742,7 @@ footer .section__label{color:var(--gold);}
     <button class="tab active" data-filter="all" role="tab" aria-selected="true">All entries</button>
     <button class="tab" data-filter="advocacy" role="tab" aria-selected="false">Advocacy &amp; Wellbeing</button>
     <button class="tab" data-filter="community" role="tab" aria-selected="false">Community &amp; Social Impact</button>
-    <button class="tab" data-filter="business" role="tab" aria-selected="false">Business &amp; Strategy</button>
+    <button class="tab" data-filter="business" role="tab" aria-selected="false">Business Development</button>
     <button class="tab" data-filter="research" role="tab" aria-selected="false">Research &amp; Exchange</button>
     <button class="tab" data-filter="hospitality" role="tab" aria-selected="false">Hospitality &amp; Service</button>
   </div>
@@ -661,7 +762,7 @@ footer .section__label{color:var(--gold);}
       <h3 class="card__role">Business Development Specialist</h3>
       <div class="card__org">TGB · Thailand · Apr–Jun 2024</div>
       <p class="card__desc">Built B2B growth strategies and pitch decks for stakeholders and partners, ran online marketplace campaigns, and managed the company's social media presence to boost brand awareness.</p>
-      <div class="card__tags"><span>Business Strategy</span><span>Marketing</span><span>Pitching</span></div>
+      <div class="card__tags"><span>Business Development</span><span>B2B Strategy</span><span>Marketing</span><span>Pitching</span></div>
     </article>
 
     <article class="card card--mint" data-cat="community" data-loc="bangkok">
@@ -969,12 +1070,13 @@ footer .section__label{color:var(--gold);}
       </ul>
     </div>
     <div class="skills__group">
-      <h4>Strategy &amp; Communication</h4>
+      <h4>Business Development &amp; Strategy</h4>
       <ul>
-        <li>Business &amp; marketing strategy</li>
+        <li>Business development &amp; B2B growth</li>
         <li>Pitch decks &amp; presentations</li>
-        <li>Public speaking &amp; facilitation</li>
+        <li>Marketing strategy &amp; campaigns</li>
         <li>Branding &amp; social media</li>
+        <li>Public speaking &amp; facilitation</li>
       </ul>
     </div>
     <div class="skills__group">
@@ -1002,6 +1104,7 @@ footer .section__label{color:var(--gold);}
 <footer id="contact">
   <div class="section__label">Get in touch</div>
   <h2 class="section__title">Let's work together</h2>
+  <p class="footer__intro">I'm open to full-time roles, and also available for freelance or contract work — whether that's <strong>business development</strong> support, <strong>UX/UI design &amp; research</strong>, or working as an <strong>assistant psychologist</strong>. If any of that fits what you need, drop me a message below.</p>
   <div class="footer__row">
     <div class="footer__item">Phone
       <a href="tel:+447899056477">07899 056477</a>
@@ -1021,6 +1124,23 @@ footer .section__label{color:var(--gold);}
 
 <script>
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---- Offer cards: jump to section, optionally applying a journey filter ---- */
+document.querySelectorAll('.offer-card[data-jump]').forEach(card => {
+  card.addEventListener('click', (e) => {
+    const filter = card.dataset.filter;
+    if(filter){
+      e.preventDefault();
+      document.getElementById('journey').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      const tab = document.querySelector(`.tab[data-filter="${filter}"]`);
+      if(tab) setActiveTab(tab);
+      cards.forEach(c => {
+        const cats = c.dataset.cat.split(' ');
+        c.classList.toggle('hidden', !cats.includes(filter));
+      });
+    }
+  });
+});
 
 /* ---- Filter tabs with sliding pill ---- */
 const tabsEl = document.getElementById('tabs');
